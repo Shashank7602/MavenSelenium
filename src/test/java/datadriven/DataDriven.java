@@ -1,19 +1,27 @@
 package datadriven;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DataDriven {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// WebDriverManager.chromedriver().setup();
-		WebDriver driver = new ChromeDriver();
+		  ChromeOptions option = new ChromeOptions();
+		    option.addArguments("--remote-allow-origins=*");
+		    WebDriverManager.chromedriver().setup();
+		    WebDriver driver = new ChromeDriver(option);
+		    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));	    
+
 		// driver.anage().timeouts().implicitlyWait(Duration.ofSecons(10));
 		driver.get("https://www.moneycontrol.com/fixed-income/calculator/state-bank-of-india-sbi/fixed-deposit-calculator-SBI-BSB001.html");
 		driver.manage().window().maximize();
